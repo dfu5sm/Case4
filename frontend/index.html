@@ -84,6 +84,8 @@
         source: (fd.get("source") || "other").toString()
       };
 
+      payload.user_agent = navigator.userAgent;
+      
       try {
         const res = await fetch("http://127.0.0.1:5000/v1/survey", {
           method: "POST",

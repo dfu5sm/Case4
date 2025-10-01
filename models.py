@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from pydantic import BaseModel, Field, EmailStr, validator
 
@@ -22,12 +22,13 @@ class SurveySubmission(BaseModel):
         if v is not True:
             raise ValueError("consent must be true")
         return v
-        
+
+
 #Good example of inheritance
 class StoredSurveyRecord(BaseModel):
     name: str
-    hashed_email: str
-    hashed_age: str
+    hashed_email: str  # Now accepts hashed string
+    hashed_age: str    # Now accepts hashed string
     consent: bool
     rating: int
     comments: Optional[str] = None
