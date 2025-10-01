@@ -9,7 +9,9 @@ class SurveySubmission(BaseModel):
     consent: bool = Field(..., description="Must be true to accept")
     rating: int = Field(..., ge=1, le=5)
     comments: Optional[str] = Field(None, max_length=1000)
-  
+    user_agent: Optional[str] = None
+    submission_id: Optional[str] = None
+    source: Optional[str] = Field(None, max_length=50)
 
     @validator("comments")
     def _strip_comments(cls, v):
@@ -22,6 +24,15 @@ class SurveySubmission(BaseModel):
         return v
         
 #Good example of inheritance
-class StoredSurveyRecord(SurveySubmission):
+class StoredSurveyRecord(BaseModel):
+    name: str
+    hashed_email: str
+    hashed_age: str
+    consent: bool
+    rating: int
+    comments: Optional[str] = None
+    user_agent: Optional[str] = None
+    submission_id: Optional[str] = None
+    source: Optional[str] = None
     received_at: datetime
     ip: str
