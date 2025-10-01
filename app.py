@@ -35,7 +35,7 @@ def submit_survey():
         return jsonify({"error": "validation_error", "detail": ve.errors()}), 422
     
     if not submission.submission_id:
-        now = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")
+        now = datetime.now(timezone.utc).strftime("%Y%m%d%H")
         submission_id = submission.email + now
     else:
         submission_id = submission.submission_id
